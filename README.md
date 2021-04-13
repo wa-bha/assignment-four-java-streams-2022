@@ -38,7 +38,7 @@ In this assignment, we define a word that only contains English letters (i.e. a-
 |Marks|Allocated to|
 |-----|-------|
 |5|At least ten informative Commit comments |
-|10| Ten questions on Moodel|
+|10| Ten questions on Moodle|
 |28 |#1 to #8 implementation (3.5 marks each). Marks are given based on the proper use of lambda expressions (or method references) and stream operations. |
 |7 |#9 implementation. Marks are given based on the proper use of lambda expressions (or method references) and stream operations|
 
