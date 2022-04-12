@@ -1,6 +1,6 @@
 # Assignment Four Java Streams (5%)
 
-## Due date Friday 19th April at 11:30 pm
+## Due date Tuesday 19th April at 11:30 pm
 
 
 # Instructions
