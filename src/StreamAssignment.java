@@ -33,7 +33,7 @@ public class StreamAssignment {
             return reader.lines()
                     .map(line -> line.split(" "))
                     .flatMap(Arrays::stream)
-                    .filter(word -> word.matches("^[a-zA-Z0-9_]{2,}$"));
+                    .filter(word -> word.matches("^[a-zA-Z0-9]{2,}$"));
 
         } catch (IOException ex) {
             System.out.println(ex);
@@ -89,7 +89,13 @@ public class StreamAssignment {
      * (2) uses Stream.reduce to find the longest digit number
      */
     public static String longestDigit(String file) {
-        return null;
+        // Filter out stream to only digits, use reduce to find longest length
+        // Need to map to outputted Optional<String> object toString -> and fix return output type
+        return toWordStream(file)
+                .filter(line -> line.matches("^[0-9]+$"))
+                .reduce((a, b) -> a.length() > b.length() ? a : b)
+                .map(Object::toString)
+                .orElse(null);
     }
 
 
