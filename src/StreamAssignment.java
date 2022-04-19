@@ -111,7 +111,27 @@ public class StreamAssignment {
      * return toWordStream(file).reduce(...);
      */
     public static long wordsWithThreeLettersCount(String file) {
-        return 0;
+
+        // Stream is already filtered to letters and digits
+        // Using reduce, set identity to 0 and increment where string length == 3
+        return toWordStream(file)
+                .reduce(0, (Integer a, String word) -> {
+                    if (word.length() == 3) {
+                        return a + 1;
+                    } else { return a; }
+                }, (v1, v2) -> v1 + v2);
+
+        //TEST
+//        return toWordStream(file)
+//                .filter(line -> line.length() == 3)
+//                .count();
+
+//          .reduce(10.0, (a,b) -> {
+//              System.out.println("accumulator "+ a +" " + b); return a+b;},
+//                  (v1, v2)-> {System.out.println("combiner " + v1 + " " + v2 );
+//              return v1+v2;});
+
+
     }
 
     /**
