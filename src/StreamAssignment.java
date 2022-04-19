@@ -181,7 +181,10 @@ public class StreamAssignment {
      * and a set of words with that length
      */
     public static Map<Integer, Set<String>> groupWordByLength(String file) {
-        return null;
+        return toWordStream(file)
+                .collect(Collectors.groupingBy(
+                        i -> i.length(), Collectors.toSet())
+                );
     }
 
 
