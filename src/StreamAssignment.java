@@ -31,20 +31,16 @@ public class StreamAssignment {
 
             //For each word (split by " "), filter out to only valid words based on regex
 
-            reader.lines()
+            return reader.lines()
+                    .parallel()
                     .map(line -> line.split(" "))
                     .flatMap(Arrays::stream)
-                    .filter(word -> word.matches("^[a-zA-Z0-9_]{2,}$"))
-                    .peek(System.out::println)
-                    .count();
+                    .filter(word -> word.matches("^[a-zA-Z0-9_]{2,}$"));
 
         } catch (IOException ex) {
             System.out.println(ex);
             return null;
         }
-
-
-        return null;
     }
 
     /**
@@ -57,8 +53,16 @@ public class StreamAssignment {
      * (3) measures the time of creating the stream and counting
      */
     public static long wordCount(String file) {
+        long start = System.nanoTime();
 
-        return 0;
+        long output;
+        output = toWordStream(file)
+                .count();
+
+        long finish = System.nanoTime();
+        System.out.println("Time Taken: " + (finish - start)/1e9  + " seconds");
+
+        return output;
 
     }
 
@@ -176,7 +180,7 @@ public class StreamAssignment {
         String file = args[0];
         try {
 
-            toWordStream(file);
+            //toWordStream(file);
 
             // Your code goes here and include the method calls for all 10 questions.
             // Q1 and Q2
