@@ -1,11 +1,10 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiFunction;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -32,7 +31,6 @@ public class StreamAssignment {
             //For each word (split by " "), filter out to only valid words based on regex
 
             return reader.lines()
-                    .parallel()
                     .map(line -> line.split(" "))
                     .flatMap(Arrays::stream)
                     .filter(word -> word.matches("^[a-zA-Z0-9_]{2,}$"));
@@ -63,7 +61,6 @@ public class StreamAssignment {
         System.out.println("Time Taken: " + (finish - start)/1e9  + " seconds");
 
         return output;
-
     }
 
     /**
@@ -75,7 +72,12 @@ public class StreamAssignment {
      * (2) generates a list of unique words, sorted in a reverse alphabetical order
      */
     public static List<String> uniqueWordList(String file) {
-        return null;
+        return toWordStream(file)
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+
+        //System.out.println(output);
     }
 
     /**
