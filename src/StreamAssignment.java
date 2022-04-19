@@ -210,11 +210,19 @@ public class StreamAssignment {
     public static void printLinesFound(BiFunction<String, String, Integer> pf, String targetFile, String targetString) {
         try {
             BufferedReader reader  = new BufferedReader(new FileReader(targetFile));
-            //reader.lines().forEach(line -> System.out.println(line));
+
+
+            reader.lines()
+                    .map(line -> new Object[] {pf.apply(line, targetString), line})
+                    .sorted((s1, s2) -> ((Integer)s2[0]).compareTo((int)s1[0]))
+                    .limit(20)
+                    .forEach(i -> System.out.println(i[0] + ":" + i[1]));
 
         } catch (IOException ex) {
             System.out.println(ex);
         }
+
+
     }
 
 
@@ -232,25 +240,25 @@ public class StreamAssignment {
             // Your code goes here and include the method calls for all 10 questions.
             // Q1 and Q2
             System.out.println("Q1. How many words are in wiki.xml?");
-			System.out.printf("%,d%n", wordCount(file));
+			//System.out.printf("%,d%n", wordCount(file));
             // Q3
             System.out.println("Q3. How many unique words are in wiki.xml?" );
-			System.out.printf("%,d%n", uniqueWordList(file) != null? uniqueWordList(file).size(): 0);
+			//System.out.printf("%,d%n", uniqueWordList(file) != null? uniqueWordList(file).size(): 0);
             // Q4
 			System.out.println("Q4. What is the longest digit number in wiki.xml?");
-			System.out.printf("%s%n", longestDigit(file));
+			//System.out.printf("%s%n", longestDigit(file));
             // Q5
 			System.out.println("Q5. How many three-letter words (case-insensitive) (e.g. \"has\", \"How\", \"wHy\", \"THE\", \"123\", etc.) are in wiki.xml?");
-			System.out.printf("%,d%n", wordsWithThreeLettersCount(file));
+			//System.out.printf("%,d%n", wordsWithThreeLettersCount(file));
 			// Q6
 			System.out.println("Q6. What is the average word length in wiki.xml?");
-			System.out.printf("%.2f%n", avergeWordlength(file));
+			//System.out.printf("%.2f%n", avergeWordlength(file));
             // Q7
 			System.out.println("Q7. How many times does the word \"the\" (case-sensitive) occur in wiki.xml?");
-			System.out.printf("%,d%n", toWordCountMap(file) != null? toWordCountMap(file).get("the"): 0);
+			//System.out.printf("%,d%n", toWordCountMap(file) != null? toWordCountMap(file).get("the"): 0);
 			// Q8
 			System.out.println("Q8. How many unique words with the length of four characters are in wiki.xml?");
-			System.out.printf("%,d%n", groupWordByLength(file) != null? groupWordByLength(file).get(4).size(): 0);
+			//System.out.printf("%,d%n", groupWordByLength(file) != null? groupWordByLength(file).get(4).size(): 0);
 
 			// Q9
 			System.out.println("Q9. What is the first index number when searching for the word \"science\" (case-sensitive) in wiki.xml?");
