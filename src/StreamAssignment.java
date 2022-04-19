@@ -145,7 +145,14 @@ public class StreamAssignment {
      * (3) the average word length can be calculated separately e.g. return total_length/total_number_of_words
      */
     public static double avergeWordlength(String file) {
-        return 0.0;
+
+        double totalLength;
+        double totalWords;
+        totalLength = toWordStream(file)
+                .reduce(0, (Integer a, String b) -> a + b.length(), Integer::sum);
+        totalWords = toWordStream(file)
+                .reduce(0, (Integer a, String b) -> a + 1, Integer::sum);
+        return totalLength / totalWords;
     }
 
     /**
@@ -213,16 +220,16 @@ public class StreamAssignment {
             // Your code goes here and include the method calls for all 10 questions.
             // Q1 and Q2
             System.out.println("Q1. How many words are in wiki.xml?");
-			System.out.printf("%,d%n", wordCount(file));
+			//System.out.printf("%,d%n", wordCount(file));
             // Q3
             System.out.println("Q3. How many unique words are in wiki.xml?" );
-			System.out.printf("%,d%n", uniqueWordList(file) != null? uniqueWordList(file).size(): 0);
+			//System.out.printf("%,d%n", uniqueWordList(file) != null? uniqueWordList(file).size(): 0);
             // Q4
 			System.out.println("Q4. What is the longest digit number in wiki.xml?");
-			System.out.printf("%s%n", longestDigit(file));
+			//System.out.printf("%s%n", longestDigit(file));
             // Q5
 			System.out.println("Q5. How many three-letter words (case-insensitive) (e.g. \"has\", \"How\", \"wHy\", \"THE\", \"123\", etc.) are in wiki.xml?");
-			System.out.printf("%,d%n", wordsWithThreeLettersCount(file));
+			//System.out.printf("%,d%n", wordsWithThreeLettersCount(file));
 			// Q6
 			System.out.println("Q6. What is the average word length in wiki.xml?");
 			System.out.printf("%.2f%n", avergeWordlength(file));
