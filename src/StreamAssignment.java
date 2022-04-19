@@ -208,7 +208,13 @@ public class StreamAssignment {
      *                      ...
      */
     public static void printLinesFound(BiFunction<String, String, Integer> pf, String targetFile, String targetString) {
+        try {
+            BufferedReader reader  = new BufferedReader(new FileReader(targetFile));
+            //reader.lines().forEach(line -> System.out.println(line));
 
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 
 
