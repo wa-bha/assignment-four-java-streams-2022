@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,6 +25,25 @@ public class StreamAssignment {
      * but “89_”, “things,” (containing punctuation) are not.
      */
     public static Stream<String> toWordStream(String file) {
+        try {
+            BufferedReader reader  = new BufferedReader(new FileReader(file));
+            //reader.lines().forEach(line -> System.out.println(line));
+
+            //For each word (split by " "), filter out to only valid words based on regex
+
+            reader.lines()
+                    .map(line -> line.split(" "))
+                    .flatMap(Arrays::stream)
+                    .filter(word -> word.matches("^[a-zA-Z0-9_]{2,}$"))
+                    .peek(System.out::println)
+                    .count();
+
+        } catch (IOException ex) {
+            System.out.println(ex);
+            return null;
+        }
+
+
         return null;
     }
 
@@ -34,7 +57,9 @@ public class StreamAssignment {
      * (3) measures the time of creating the stream and counting
      */
     public static long wordCount(String file) {
+
         return 0;
+
     }
 
     /**
@@ -150,6 +175,9 @@ public class StreamAssignment {
         }
         String file = args[0];
         try {
+
+            toWordStream(file);
+
             // Your code goes here and include the method calls for all 10 questions.
             // Q1 and Q2
             System.out.println("Q1. How many words are in wiki.xml?");
